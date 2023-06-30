@@ -2,19 +2,12 @@ package com.earlyou.aom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class AomApplication extends SpringBootServletInitializer{
+public class AomApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AomApplication.class, args);
-	}
-	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(AomApplication.class);
 	}
 
 }
