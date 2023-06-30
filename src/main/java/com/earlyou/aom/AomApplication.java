@@ -9,8 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class AomApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(AomApplication.class);
-		application.run(args);
+		SpringApplication.run(AomApplication.class, args);
 	}
 	
 	@Override
