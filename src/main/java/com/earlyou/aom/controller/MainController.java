@@ -13,4 +13,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/sysspec")
+	public String sysspec(Model m) {
+		m.addAttribute("main", "sysspec/sysspec");
+		return "index";
+	}
 }
