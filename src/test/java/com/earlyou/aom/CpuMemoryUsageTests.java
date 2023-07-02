@@ -16,30 +16,32 @@ class CpuMemoryUsageTests {
 
 			for (int i = 0; i < 100; i++) {
 				System.out.println("***********************************************************");
-				double committedvirtualmemorysize = osbean.getCommittedVirtualMemorySize()/1024.0/1024.0/1024.0;
+				double processcputime = osbean.getProcessCpuTime()/1000000000.0;
 				double cpuload = osbean.getCpuLoad()*100.0;
+				double systemloadaverage = osbean.getSystemLoadAverage();
+				double processcpuload = osbean.getProcessCpuLoad()*100.0;
 				
-				double totalmemorysize = osbean.getTotalMemorySize()/1024.0/1024.0/1024.0;
-				double freememorysize = osbean.getFreeMemorySize()/1024.0/1024.0/1024.0;
+				double totalmemorysize = osbean.getTotalMemorySize()/(1024.0*1024.0*1024.0);
+				double freememorysize = osbean.getFreeMemorySize()/(1024.0*1024.0*1024.0);
 				double memoryusage = totalmemorysize - freememorysize;
 				double memoryload = (memoryusage/totalmemorysize)*100.0;
+				double committedvirtualmemorysize = osbean.getCommittedVirtualMemorySize()/(1024.0*1024.0*1024.0);
 				
-				double freeswapspacesize = osbean.getFreeSwapSpaceSize()/1024.0/1024.0/1024.0;
-				double processcpuload = osbean.getProcessCpuLoad()*100.0;
-				long processcputime = osbean.getProcessCpuTime();
-				double totalswapspacesize = osbean.getTotalSwapSpaceSize()/1024.0/1024.0/1024.0;
+				double freeswapspacesize = osbean.getFreeSwapSpaceSize()/(1024.0*1024.0*1024.0);
+				double totalswapspacesize = osbean.getTotalSwapSpaceSize()/(1024.0*1024.0*1024.0);
 				
-				System.out.println("Committed Virtual Memory Size : " + String.format("%.2f", committedvirtualmemorysize) + " GB");
+				System.out.println("Process Cpu Time : " + String.format("%.2f", processcputime) + " sec");
 				System.out.println("Cpu Load : " + String.format("%.2f", cpuload) + " %");
+				System.out.println("System Load Average : " + systemloadaverage);
+				System.out.println("Process Cpu Load : " + String.format("%.2f", processcpuload) + " %");
 				
 				System.out.println("Total Memory Size : " + String.format("%.2f", totalmemorysize) + " GB");
 				System.out.println("Free Memory Size : " + String.format("%.2f", freememorysize) + " GB");
 				System.out.println("Memory Usage : " + String.format("%.2f", memoryusage) + " GB");
 				System.out.println("Memory Load : " + String.format("%.2f", memoryload) + " %");
+				System.out.println("Committed Virtual Memory Size : " + String.format("%.2f", committedvirtualmemorysize) + " GB");
 				
 				System.out.println("Free Swap Space Size : " + String.format("%.2f", freeswapspacesize) + " GB");
-				System.out.println("Process Cpu Load : " + String.format("%.2f", processcpuload) + " %");
-				System.out.println("Process Cpu Time : " + processcputime);
 				System.out.println("Total Swap Space Size : " + String.format("%.2f", totalswapspacesize) + " GB");
 				Thread.sleep(1000);
 			}

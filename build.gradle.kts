@@ -40,6 +40,7 @@ dependencies {
 	compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 	implementation("javax.servlet:jstl:1.2")
 	implementation("com.googlecode.json-simple:json-simple:1.1.1")
+	implementation("com.github.oshi:oshi-core:6.4.4")
 }
 
 tasks.withType<Test> {
