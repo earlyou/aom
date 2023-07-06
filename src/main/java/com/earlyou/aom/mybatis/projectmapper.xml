@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.ProjectMapper">
+
+	<select id="select" parameterType="String" resultType="projectVO">
+		SELECT * FROM proj
+		WHERE pjnm=#{pjnm}
+	</select>
+	<select id="selectall" resultType="projectVO">
+		SELECT * FROM proj
+	</select>
+	<insert id="insert" parameterType="projectVO">
+		INSERT INTO proj VALUES (#{pjnm},#{amid},#{pjdm},#{pjdd},DEFAULT,NULL)
+	</insert>
+	<update id="update" parameterType="projectVO">
+		UPDATE proj SET amid=#{amid},pjdm=#{pjdm},pjdd=#{pjdd} WHERE pjnm=#{pjnm}
+	</update>
+	<delete id="delete" parameterType="String">
+		UPDATE proj SET pjdp=CURRENT_TIMESTAMP() WHERE pjnm=#{pjnm}
+	</delete>
+	
+</mapper>

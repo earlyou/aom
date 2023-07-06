@@ -73,7 +73,6 @@ public class OshiDynamicTests {
 				System.out.println("**********************  CPU Usage  **********************");
 				prevTicks = processor.getSystemCpuLoadTicks();
 				double cpuUsage = processor.getSystemCpuLoadBetweenTicks(prevTicks);							// 0.5%
-	            
 	            for (double avg : processor.getProcessorCpuLoad(1000)) {
 	    			System.out.println(String.format(" %.1f%%", avg*100.0));									// 0.0% 0.0% 0.0% 0.0% 3.1% 0.0%
 	    		}
