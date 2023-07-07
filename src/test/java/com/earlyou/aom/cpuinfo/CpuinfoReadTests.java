@@ -1,22 +1,26 @@
-package com.earlyou.aom.contact;
+package com.earlyou.aom.cpuinfo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.ContactBiz;
+import com.earlyou.aom.biz.CpuBiz;
+import com.earlyou.aom.vo.CpuVO;
 
 @SpringBootTest
-class ContactDeleteTests {
+class CpuinfoReadTests {
 
 	@Autowired
-	ContactBiz contactbiz;
+	CpuBiz cpubiz;
 
 	@Test
 	void contextLoads() {
 		
+		CpuVO info = null;
+		
 		try {
-			contactbiz.remove(3);
+			info = cpubiz.get("Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz");
+			System.out.println(info);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

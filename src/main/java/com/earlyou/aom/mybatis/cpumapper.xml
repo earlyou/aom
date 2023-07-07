@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.CpuMapper">
+
+	<select id="select" parameterType="String" resultType="cpuVO">
+		SELECT * FROM cpuinfo
+		WHERE cname=#{cname}
+	</select>
+	<select id="selectall" resultType="cpuVO">
+		SELECT * FROM cpuinfo
+	</select>
+	<insert id="insert" parameterType="cpuVO">
+		INSERT INTO cpuinfo VALUES (#{cname},#{carch},#{cpc},#{cppc},#{clpc})
+	</insert>
+	<update id="update" parameterType="cpuVO">
+		UPDATE cpuinfo SET carch=#{carch},cpc=#{cpc},cppc=#{cppc},clpc=#{clpc} WHERE cname=#{cname}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM cpuinfo WHERE cname=#{cname}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM cpuinfo
+	</delete>
+	
+</mapper>

@@ -1,22 +1,26 @@
-package com.earlyou.aom.contact;
+package com.earlyou.aom.osinfo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.ContactBiz;
+import com.earlyou.aom.biz.OsinfoBiz;
+import com.earlyou.aom.vo.OsinfoVO;
 
 @SpringBootTest
-class ContactDeleteTests {
+class OsinfoReadTests {
 
 	@Autowired
-	ContactBiz contactbiz;
+	OsinfoBiz osinfobiz;
 
 	@Test
 	void contextLoads() {
 		
+		OsinfoVO info = null;
+		
 		try {
-			contactbiz.remove(3);
+			info = osinfobiz.get("Microsoft Windows 11 build 22621");
+			System.out.println(info);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

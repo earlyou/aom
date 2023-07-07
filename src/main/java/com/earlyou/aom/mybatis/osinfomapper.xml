@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.OsinfoMapper">
+
+	<select id="select" parameterType="String" resultType="osinfoVO">
+		SELECT * FROM osinfo
+		WHERE os=#{os}
+	</select>
+	<select id="selectall" resultType="osinfoVO">
+		SELECT * FROM osinfo
+	</select>
+	<insert id="insert" parameterType="osinfoVO">
+		INSERT INTO osinfo VALUES (#{os},#{sysboot})
+	</insert>
+	<update id="update" parameterType="osinfoVO">
+		UPDATE osinfo SET sysboot=#{sysboot} WHERE os=#{os}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM osinfo WHERE os=#{os}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM osinfo
+	</delete>
+	
+</mapper>

@@ -1,7 +1,6 @@
 package com.earlyou.aom;
 
 import java.time.Instant;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -40,11 +39,11 @@ public class OshiStaticTests {
 		String mbvs = hal.getComputerSystem().getBaseboard().getVersion();									//
 		
 		System.out.println("**********************  CPU  **********************");
-		String cpunm = hal.getProcessor().getProcessorIdentifier().getName();								// Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz
-		int cpupg = hal.getProcessor().getPhysicalPackageCount();											// 1
-		int cpupc = hal.getProcessor().getPhysicalProcessorCount();											// 6
-		int cpulc = hal.getProcessor().getLogicalProcessorCount();											// 6
-		String cpuarc = hal.getProcessor().getProcessorIdentifier().getMicroarchitecture();					// Coffee Lake
+		String cname = hal.getProcessor().getProcessorIdentifier().getName();								// Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz
+		int cpc = hal.getProcessor().getPhysicalPackageCount();											// 1
+		int cppc = hal.getProcessor().getPhysicalProcessorCount();											// 6
+		int clpc = hal.getProcessor().getLogicalProcessorCount();											// 6
+		String carch = hal.getProcessor().getProcessorIdentifier().getMicroarchitecture();					// Coffee Lake
 		
 		System.out.println("**********************  Memory  **********************");
 		double totmem = Math.round(hal.getMemory().getTotal()/(1024.0*1024.0*1024.0)*100)/100.0;			// 15.94 GB
