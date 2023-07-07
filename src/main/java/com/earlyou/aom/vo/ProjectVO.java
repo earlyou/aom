@@ -16,6 +16,7 @@ public class ProjectVO {
 	private String pjnm;		/** project name */
 	private String amid;		/** admin ID */
 	private String pjdm;		/** project domain */
+	private String pjdc;		/** project description*/
 	private String pjdd;		/** project dev date */
 	private String pjrd;		/** project register date */
 	private String pjdp;		/** project deprecated date */
@@ -24,11 +25,12 @@ public class ProjectVO {
 	/**
 	 * for Update, Insert
 	 */
-	public ProjectVO(String pjnm, String amid, String pjdm, String pjdd) {
+	public ProjectVO(String pjnm, String amid, String pjdm, String pjdc, String pjdd) {
 		super();
 		this.pjnm = pjnm;
 		this.amid = amid;
 		this.pjdm = pjdm;
+		this.pjdc = pjdc;
 		this.pjdd = pjdd;
 	}
 

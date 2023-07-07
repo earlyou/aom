@@ -13,10 +13,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM proj
 	</select>
 	<insert id="insert" parameterType="projectVO">
-		INSERT INTO proj VALUES (#{pjnm},#{amid},#{pjdm},#{pjdd},DEFAULT,NULL)
+		INSERT INTO proj VALUES (#{pjnm},#{amid},#{pjdm},#{pjdc},#{pjdd},DEFAULT,NULL)
 	</insert>
 	<update id="update" parameterType="projectVO">
-		UPDATE proj SET amid=#{amid},pjdm=#{pjdm},pjdd=#{pjdd} WHERE pjnm=#{pjnm}
+		UPDATE proj SET amid=#{amid},pjdm=#{pjdm},pjdc=#{pjdc},pjdd=#{pjdd} WHERE pjnm=#{pjnm}
 	</update>
 	<delete id="delete" parameterType="String">
 		UPDATE proj SET pjdp=CURRENT_TIMESTAMP() WHERE pjnm=#{pjnm}

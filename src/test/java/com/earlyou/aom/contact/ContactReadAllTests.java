@@ -1,4 +1,4 @@
-package com.earlyou.aom.project;
+package com.earlyou.aom.contact;
 
 import java.util.List;
 
@@ -6,24 +6,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.ProjectBiz;
-import com.earlyou.aom.vo.ProjectVO;
+import com.earlyou.aom.biz.ContactBiz;
+import com.earlyou.aom.vo.ContactVO;
 
 @SpringBootTest
-class ProjectReadAllTests {
+class ContactReadAllTests {
 	
 	@Autowired
-	ProjectBiz projectbiz;
+	ContactBiz contactbiz;
 
 	@Test
 	void contextLoads() {
 		
-		List<ProjectVO> list = null;
+		List<ContactVO> list = null;
 		
 		try {
-			list = projectbiz.get();
-			for (ProjectVO project : list) {
-				System.out.println(project);
+			list = contactbiz.get();
+			for (ContactVO cont : list) {
+				System.out.println(cont);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

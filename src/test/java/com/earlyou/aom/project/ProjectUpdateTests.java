@@ -4,22 +4,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.AdminBiz;
-import com.earlyou.aom.vo.AdminVO;
+import com.earlyou.aom.biz.ProjectBiz;
+import com.earlyou.aom.vo.ProjectVO;
 
 @SpringBootTest
 class ProjectUpdateTests {
 	
 	@Autowired
-	AdminBiz adminbiz;
+	ProjectBiz projectbiz;
 
 	@Test
 	void contextLoads() {
-		String testinfo = "This is Updated Information";
-		AdminVO admin = new AdminVO("testID", false, "updatepwd", "updatename", "M", 1990, 1, 1, "update@email.com", 82, "01012341234", "update location", testinfo);
+		ProjectVO proj = new ProjectVO("test project name", "testID", "update.com", "update description", "2021-03-03");
 		
 		try {
-			adminbiz.modify(admin);
+			projectbiz.modify(proj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

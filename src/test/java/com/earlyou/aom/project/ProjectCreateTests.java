@@ -15,7 +15,7 @@ class ProjectCreateTests {
 
 	@Test
 	void contextLoads() {
-		ProjectVO proj = new ProjectVO("test project name", "testID", "test domain","2023-01-23");
+		ProjectVO proj = new ProjectVO("test project name", "testID", "test.com","test descriptions","2023-01-23");
 		
 		try {
 			projectbiz.register(proj);

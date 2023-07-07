@@ -1,26 +1,26 @@
-package com.earlyou.aom.project;
+package com.earlyou.aom.contact;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.ProjectBiz;
-import com.earlyou.aom.vo.ProjectVO;
+import com.earlyou.aom.biz.ContactBiz;
+import com.earlyou.aom.vo.ContactVO;
 
 @SpringBootTest
-class ProjectReadTests {
-	
+class ContactReadTests {
+
 	@Autowired
-	ProjectBiz projectbiz;
+	ContactBiz contactbiz;
 
 	@Test
 	void contextLoads() {
 		
-		ProjectVO project = null;
+		ContactVO cont = null;
 		
 		try {
-			project = projectbiz.get("test project name");
-			System.out.println(project);
+			cont = contactbiz.get(2);
+			System.out.println(cont);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

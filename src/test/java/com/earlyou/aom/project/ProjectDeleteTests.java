@@ -4,20 +4,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.earlyou.aom.biz.AdminBiz;
+import com.earlyou.aom.biz.ProjectBiz;
 
 @SpringBootTest
 class ProjectDeleteTests {
 	
 	@Autowired
-	AdminBiz adminbiz;
+	ProjectBiz projectbiz;
 
 	@Test
 	void contextLoads() {
-		String adminId = "testID";
+		String projectname = "test project name";
 		
 		try {
-			adminbiz.remove(adminId);
+			projectbiz.remove(projectname);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
