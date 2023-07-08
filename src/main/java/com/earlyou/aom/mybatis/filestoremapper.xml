@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.FilestoreMapper">
+
+	<select id="select" parameterType="String" resultType="filestoreVO">
+		SELECT * FROM filestore
+		WHERE fsmnt=#{fsmnt}
+	</select>
+	<select id="selectall" resultType="filestoreVO">
+		SELECT * FROM filestore
+	</select>
+	<insert id="insert" parameterType="filestoreVO">
+		INSERT INTO filestore VALUES (#{fsmnt},#{fstot},#{fstype})
+	</insert>
+	<update id="update" parameterType="filestoreVO">
+		UPDATE filestore SET fstot=#{fstot},fstype=#{fstype} WHERE fsmnt=#{fsmnt}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM filestore WHERE fsmnt=#{fsmnt}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM filestore
+	</delete>
+	
+</mapper>

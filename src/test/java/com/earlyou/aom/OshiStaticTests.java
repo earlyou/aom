@@ -56,7 +56,7 @@ public class OshiStaticTests {
 			String mtype = pm.getMemoryType();																// DDR4
 		}
 		
-		System.out.println("**********************  Disks  **********************");
+		System.out.println("**********************  filestore  **********************");
 		List<HWDiskStore> dv =  hal.getDiskStores();														// [all List about drives]
 		for (OSFileStore fs : fileSystem.getFileStores()) {
 			String fsmnt = fs.getMount();																	// C:\

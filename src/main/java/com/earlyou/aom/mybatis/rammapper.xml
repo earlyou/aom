@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.RamMapper">
+
+	<select id="select" parameterType="String" resultType="ramVO">
+		SELECT * FROM ram
+		WHERE mbank=#{mbank}
+	</select>
+	<select id="selectall" resultType="ramVO">
+		SELECT * FROM ram
+	</select>
+	<insert id="insert" parameterType="ramVO">
+		INSERT INTO ram VALUES (#{mbank},#{mcapa},#{mclock},#{mmfr},#{mtype})
+	</insert>
+	<update id="update" parameterType="ramVO">
+		UPDATE ram SET mcapa=#{mcapa},mclock=#{mclock},mmfr=#{mmfr},mtype=#{mtype} WHERE mbank=#{mbank}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM ram WHERE mbank=#{mbank}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM ram
+	</delete>
+	
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.VgaMapper">
+
+	<select id="select" parameterType="String" resultType="vgaVO">
+		SELECT * FROM vga
+		WHERE gcid=#{gcid}
+	</select>
+	<select id="selectall" resultType="vgaVO">
+		SELECT * FROM vga
+	</select>
+	<insert id="insert" parameterType="vgaVO">
+		INSERT INTO vga VALUES (#{gcid},#{gcnm},#{gcvd},#{gcvs},#{gcvr})
+	</insert>
+	<update id="update" parameterType="vgaVO">
+		UPDATE vga SET gcnm=#{gcnm},gcvd=#{gcvd},gcvs=#{gcvs},gcvr=#{gcvr} WHERE gcid=#{gcid}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM vga WHERE gcid=#{gcid}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM vga
+	</delete>
+	
+</mapper>
