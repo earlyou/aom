@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="./assets/compiled/css/app.css" />
 	<link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
 	<link rel="stylesheet" href="./assets/compiled/css/iconly.css" />
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
@@ -24,11 +24,12 @@
 		<!-- sidebar -->
 		<div th:replace="~{${sidebar} ? ${sidebar} : sidebar}"></div>
 		
+		
 		<!-- main -->
 		<div th:replace="~{${main} ? ${main} : error-404}"></div>
-		
+
 	</div>
-	
+
 </body>
 
 </html>

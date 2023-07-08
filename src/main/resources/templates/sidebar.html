@@ -3,7 +3,7 @@
 		<div class="sidebar-header position-relative">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="logo">
-					<a href="index.html"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset="" /></a>
+					<a href="/"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset="" /></a>
 				</div>
 				<div class="theme-toggle d-flex gap-2 align-items-center mt-2">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -43,18 +43,31 @@
 			<ul class="menu">
 				<li class="sidebar-title">Menu</li>
 
-				<li class="sidebar-item active">
+				<li class="sidebar-item">
 					<a href="/" class="sidebar-link">
 						<i class="bi bi-grid-fill"></i>
 						<span>Dashboard</span>
 					</a>
 				</li>
-				
-				<li class="sidebar-item">
-					<a href="/sysspec" class="sidebar-link">
+
+				<li class="sidebar-item has-sub">
+					<a href="#" class="sidebar-link">
 						<i class="bi bi-graph-up"></i>
-						<span>System Specification</span>
+						<span>System</span>
 					</a>
+					<ul class="submenu">
+						<li class="submenu-item">
+							<a href="/specification" class="submenu-link">Specification</a>
+						</li>
+
+						<li class="submenu-item">
+							<a href="/performance" class="submenu-link">Performance</a>
+						</li>
+
+						<li class="submenu-item">
+							<a href="component-badge.html" class="submenu-link">Badge</a>
+						</li>
+					</ul>
 				</li>
 
 				<li class="sidebar-item has-sub">
@@ -517,3 +530,20 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('.sidebar-item').removeClass('active');
+	$('.submenu-item').removeClass('active');
+	$('.submenu').removeClass('active');
+	$('.has-sub').removeClass('active');
+	
+	var pathname = $(location).attr('pathname');
+	if($('a[href='+'"'+pathname+'"'+']').hasClass('submenu-link')){
+		$('a[href=' + '"' + pathname + '"' + ']').parent('li').parent('ul').parent('li').addClass('active');
+		$('a[href=' + '"' + pathname + '"' + ']').parent('li').parent('ul').addClass('active');
+		$('a[href=' + '"' + pathname + '"' + ']').parent('li').addClass('active');
+	}else{
+		$('a[href=' + '"' + pathname + '"' + ']').parent('li').addClass('active');
+	}
+	
+</script>
