@@ -1,0 +1,379 @@
+<header class="mb-3">
+	<a href="#" class="burger-btn d-block d-xl-none">
+		<i class="bi bi-justify fs-3"></i>
+	</a>
+</header>
+
+<div class="page-heading">
+	<h3>System Specification</h3>
+</div>
+
+<div class="page-content">
+	<section class="row">
+		<div class="col-12 col-lg-6">
+
+			<!-- System -->
+			<div class="card">
+				<div class="card-header">
+					<h4>System</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">OS</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${os.os}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">System Boot Time</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${os.sysboot}"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- CPU -->
+			<div class="card">
+				<div class="card-header">
+					<h4>CPU</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Name</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${cpu.cname}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Microarchitecture</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${cpu.carch}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">physical package</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${cpu.cpc}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">physical processor</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${cpu.cppc}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">logical processor</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${cpu.clpc}"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- FileStore -->
+			<div class="card">
+				<div class="card-header">
+					<h4>FileStore</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody th:each="fs:${fslist}">
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Mount</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${fs.fsmnt}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Type</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${fs.fstype}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Total Space</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${fs.fstot}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0"></p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-12 col-lg-6">
+
+			<!-- Motherboard -->
+			<div class="card">
+				<div class="card-header">
+					<h4>Motherboard</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">S/N</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${mb.mbsn}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Model</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${mb.mbmd}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Manufacturer</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${mb.mbmfr}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Firmware Version</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${mb.mbvs}"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Memory -->
+			<div class="card">
+				<div class="card-header">
+					<h4>Memory</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody th:each="ram:${ramlist}">
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Bank</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${ram.mbank}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Manufacturer</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${ram.mmfr}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Type</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${ram.mtype}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Capacity</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${ram.mcapa}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Clock</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${ram.mclock}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0"></p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Graphic Cards -->
+			<div class="card">
+				<div class="card-header">
+					<h4>Graphic Cards</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-lg">
+							<tbody th:each="vga:${vgalist}">
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Name</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${vga.gcnm}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Vendor</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${vga.gcvd}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">VRAM</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${vga.gcvr}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0">Driver Version</p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0" th:text="${vga.gcvs}"></p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-3">
+										<div class="d-flex align-items-center">
+											<p class="font-bold ms-3 mb-0"></p>
+										</div>
+									</td>
+									<td class="col-auto">
+										<p class="mb-0"></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<footer th:replace="~{footer}"></footer>
+
+<script src="assets/static/js/components/dark.js"></script>
+<script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+<script src="assets/compiled/js/app.js"></script>
