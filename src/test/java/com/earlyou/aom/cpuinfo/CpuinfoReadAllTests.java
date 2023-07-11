@@ -17,18 +17,22 @@ class CpuinfoReadAllTests {
 
 	@Test
 	void contextLoads() {
-		
+
 		List<CpuVO> list = null;
-		
+
 		try {
 			list = cpubiz.get();
-			for (CpuVO obj : list) {
-				System.out.println(obj);
+			if (list.isEmpty() == true) {
+				System.out.println("no data");
+			} else {
+				for (CpuVO obj : list) {
+					System.out.println(obj);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

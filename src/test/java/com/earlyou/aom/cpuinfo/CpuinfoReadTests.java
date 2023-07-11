@@ -20,6 +20,7 @@ class CpuinfoReadTests {
 		
 		try {
 			info = cpubiz.get("Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz");
+			System.out.println(info == null);
 			System.out.println(info);
 		} catch (Exception e) {
 			e.printStackTrace();
