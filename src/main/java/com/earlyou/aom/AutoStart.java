@@ -1,7 +1,6 @@
 package com.earlyou.aom;
 
 import java.time.Instant;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,37 +62,19 @@ public class AutoStart implements CommandLineRunner {
 		ComputerSystem com = hal.getComputerSystem();
 		Baseboard mb = com.getBaseboard();
 		GlobalMemory memory = hal.getMemory();
-		List<PhysicalMemory> mem = memory.getPhysicalMemory();
-
-		log.info("Reading System Databases");
-		OsinfoVO oldos = osbiz.get().get(0);
-		MbVO oldmb = mbbiz.get().get(0);
-		CpuVO oldcpu = cpubiz.get().get(0);
-		List<RamVO> oldmem = rambiz.get();
-		List<FilestoreVO> oldfs = fsbiz.get();
-		List<VgaVO> oldvga = vgabiz.get();
 
 		// Osinfo
+		log.info("Updating OS informaion");
+		osbiz.removeall();
 		String osinfo = os.toString();
 		String booted = String.valueOf(Instant.ofEpochSecond(os.getSystemBootTime()));
 		booted = booted.replace("T", " ").replace("Z", "");
 		OsinfoVO newos = new OsinfoVO(osinfo, booted);
-		if (oldos == null) {
-			log.info("OS information not found");
-			log.info("Registering new OS information");
-			osbiz.removeall();
-			osbiz.register(newos);
-		} else if (oldos != newos) {
-			log.info("Change in OS information detected");
-			osbiz.removeall();
-			osbiz.register(newos);
-		} else if (oldos == newos) {
-			log.info("OS information not changed");
-		} else {
-			log.info("ERROR in updating OS information");
-		}
+		osbiz.register(newos);
 
 		// Motherboard
+		log.info("Updating OS informaion");
+		mbbiz.removeall();
 		String mbsn = mb.getSerialNumber();
 		String mbmfr = mb.getManufacturer();
 		String mbmd = mb.getModel();
@@ -102,45 +83,23 @@ public class AutoStart implements CommandLineRunner {
 			mbvs = com.getFirmware().getVersion();
 		}
 		MbVO newmb = new MbVO(mbsn, mbmfr, mbmd, mbvs);
-		if (oldmb == null) {
-			log.info("Motherboard information not found");
-			log.info("Registering new Motherboard information");
-			mbbiz.removeall();
-			mbbiz.register(newmb);
-		} else if (oldmb != newmb) {
-			log.info("Change in Motherboard information detected");
-			mbbiz.removeall();
-			mbbiz.register(newmb);
-		} else if (oldmb == newmb) {
-			log.info("Motherboard information not changed");
-		} else {
-			log.info("ERROR in updating Motherboard information");
-		}
+		mbbiz.register(newmb);
 
 		// CPU
+		log.info("Updating CPU informaion");
+		cpubiz.removeall();
 		String cname = cpu.getProcessorIdentifier().getName();
 		String carch = cpu.getProcessorIdentifier().getMicroarchitecture();
 		int cpc = cpu.getPhysicalPackageCount();
 		int cppc = cpu.getPhysicalProcessorCount();
 		int clpc = cpu.getLogicalProcessorCount();
 		CpuVO newcpu = new CpuVO(cname, carch, cpc, cppc, clpc);
-		if (oldcpu == null) {
-			log.info("CPU information not found");
-			log.info("Registering new CPU information");
-			cpubiz.removeall();
-			cpubiz.register(newcpu);
-		} else if (oldcpu != newcpu) {
-			log.info("Change in CPU information detected");
-			cpubiz.removeall();
-			cpubiz.register(newcpu);
-		} else if (oldcpu == newcpu) {
-			log.info("CPU information not changed");
-		} else {
-			log.info("ERROR in updating CPU information");
-		}
+		cpubiz.register(newcpu);
 
 		// Memory
-		List<RamVO> newmem = null;
+		log.info("Updating Motherboard informaion");
+		rambiz.removeall();
+		List<PhysicalMemory> mem = memory.getPhysicalMemory();
 		for (PhysicalMemory pm : mem) {
 			String mbank = pm.getBankLabel();
 			double mcapa = pm.getCapacity();
@@ -148,32 +107,23 @@ public class AutoStart implements CommandLineRunner {
 			String mmfr = pm.getManufacturer();
 			String mtype = pm.getMemoryType();
 			RamVO newram = new RamVO(mbank, mcapa, mclock, mmfr, mtype);
-			newmem.add(newram);
-		}
-		if (oldmem == newmem) {
-			log.info("Memory information not changed");
-		} else if (oldmem.isEmpty() == true) {
-			log.info("Memory information not found");
-			log.info("Registering new Memory information");
-			rambiz.removeall();
-			for (RamVO ramVO : newmem) {
-				rambiz.register(ramVO);
-			}
-		} else if (oldmem != newmem) {
-			log.info("Change in Memory information detected");
-			rambiz.removeall();
-			for (RamVO ramVO : newmem) {
-				rambiz.register(ramVO);
-			}
+			rambiz.register(newram);
 		}
 
 		// FileStore
+		log.info("Updating FileStore informaion");
+		fsbiz.removeall();
 		for (OSFileStore fs : fileSystem.getFileStores()) {
 			String fsmnt = fs.getMount();
 			double fstot = fs.getTotalSpace();
 			String fstype = fs.getType();
+			FilestoreVO newfs = new FilestoreVO(fsmnt, fstot, fstype);
+			fsbiz.register(newfs);
 		}
 
+		// Graphic Cards
+		log.info("Updating Graphic Cards informaion");
+		vgabiz.removeall();
 		List<GraphicsCard> vga = hal.getGraphicsCards();
 		for (GraphicsCard gc : vga) {
 			String gcid = gc.getDeviceId();
@@ -181,6 +131,8 @@ public class AutoStart implements CommandLineRunner {
 			String gcvd = gc.getVendor().substring(0, gc.getVendor().indexOf(" "));
 			String gcvs = gc.getVersionInfo().substring(gc.getVersionInfo().indexOf("=") + 1);
 			double gcvr = gc.getVRam();
+			VgaVO vgavo = new VgaVO(gcid, gcnm, gcvd, gcvs, gcvr);
+			vgabiz.register(vgavo);
 		}
 	}
 
