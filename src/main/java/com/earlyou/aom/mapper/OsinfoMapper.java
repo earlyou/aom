@@ -15,6 +15,5 @@ public interface OsinfoMapper {
 	public void update(OsinfoVO obj) throws Exception;
 	public OsinfoVO select(String obj) throws Exception;
 	public List<OsinfoVO> selectall() throws Exception;
-
 	public void deleteall() throws Exception;
 }
