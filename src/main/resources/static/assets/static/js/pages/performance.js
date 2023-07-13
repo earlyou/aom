@@ -1,4 +1,26 @@
 $(document).ready(function() {
+
+	const ctx = document.getElementById('cpu-usage');
+
+	new Chart(ctx, {
+		type: 'pie',
+		data: {
+			labels: ['Blue', 'Green'],
+			datasets: [{
+				label: 'CPU Usage',
+				data: [70, 30],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		}
+	});
+
 	let optionsCpuUsage = {
 		series: [0, 100],
 		labels: ["Usage", "Free"],
@@ -19,13 +41,13 @@ $(document).ready(function() {
 			},
 		},
 	}
-	
+
 	var cpuUsage = new ApexCharts(
 		document.getElementById("cpu-usage"),
 		optionsCpuUsage
 	)
 	cpuUsage.render();
-		
+
 	var cpuusage;
 	setInterval(function() {
 		cpuusage = getcpu();
