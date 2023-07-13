@@ -148,7 +148,8 @@
 										</div>
 									</td>
 									<td class="col-auto">
-										<p class="mb-0" th:text="${fs.fstot}"></p>
+										<p class="mb-0" th:text="(${fs.fstot} >= 1099511627776) ? ${#numbers.formatDecimal(fs.fstot/(1024*1024*1024)/1024,1,2)}+' TB' : ${#numbers.formatDecimal(fs.fstot/(1024*1024*1024),1,2)}+' GB'">
+										</p>
 									</td>
 								</tr>
 								<tr>
@@ -273,7 +274,7 @@
 										</div>
 									</td>
 									<td class="col-auto">
-										<p class="mb-0" th:text="${ram.mcapa}"></p>
+										<p class="mb-0" th:text="(${ram.mcapa} >= 1073741824) ? ${#numbers.formatDecimal(ram.mcapa/(1024*1024*1024),1,2)}+' GB' : ${#numbers.formatDecimal(ram.mcapa/(1024*1024),1,2)}+' MB'"></p>
 									</td>
 								</tr>
 								<tr>
@@ -283,7 +284,7 @@
 										</div>
 									</td>
 									<td class="col-auto">
-										<p class="mb-0" th:text="${ram.mclock}"></p>
+										<p class="mb-0" th:text="${#numbers.formatDecimal(ram.mclock/(1024*1024),1,2)}+' MHz'"></p>
 									</td>
 								</tr>
 								<tr>
@@ -339,7 +340,7 @@
 										</div>
 									</td>
 									<td class="col-auto">
-										<p class="mb-0" th:text="${vga.gcvr}"></p>
+										<p class="mb-0" th:text="${#numbers.formatDecimal(vga.gcvr/(1024*1024*1024),1,2)}+' GB'"></p>
 									</td>
 								</tr>
 								<tr>

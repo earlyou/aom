@@ -1,21 +1,15 @@
 package com.earlyou.aom;
 
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor.TickType;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
-import oshi.hardware.HWPartition;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.Sensors;
 import oshi.software.os.FileSystem;
@@ -25,7 +19,6 @@ import oshi.software.os.OperatingSystem;
 import oshi.software.os.OperatingSystem.ProcessFiltering;
 import oshi.software.os.OperatingSystem.ProcessSorting;
 import oshi.util.FormatUtil;
-import oshi.util.Util;
 
 
 @SpringBootTest
@@ -71,8 +64,9 @@ public class OshiDynamicTests {
 				}
 				
 				System.out.println("**********************  CPU Usage  **********************");
-				prevTicks = processor.getSystemCpuLoadTicks();
 				double cpuUsage = processor.getSystemCpuLoadBetweenTicks(prevTicks);							// 0.5%
+				prevTicks = processor.getSystemCpuLoadTicks();
+				System.out.println(cpuUsage);
 	            for (double avg : processor.getProcessorCpuLoad(1000)) {
 	    			System.out.println(String.format(" %.1f%%", avg*100.0));									// 0.0% 0.0% 0.0% 0.0% 3.1% 0.0%
 	    		}
@@ -92,7 +86,7 @@ public class OshiDynamicTests {
 	    					FormatUtil.formatBytes(p.getResidentSetSize()), p.getName()));
 	    		}
 		        
-//				Thread.sleep(1000);
+				Thread.sleep(1000);
 			}
 
 		} catch (Exception e) {
