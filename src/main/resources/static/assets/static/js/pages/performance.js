@@ -1,59 +1,42 @@
-$(document).ready(function() {
+const cpu = document.getElementById('cpu-usage');
 
-	const ctx = document.getElementById('cpu-usage');
-
-	new Chart(ctx, {
-		type: 'pie',
-		data: {
-			labels: ['Blue', 'Green'],
-			datasets: [{
-				label: 'CPU Usage',
-				data: [70, 30],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	});
-
-	let optionsCpuUsage = {
-		series: [0, 100],
+const CpuChart = new Chart(cpu, {
+	type: 'pie',
+	data: {
 		labels: ["Usage", "Free"],
-		colors: ["#435ebe", "#55c6e8"],
-		chart: {
-			type: "donut",
-			width: "100%",
-			height: "350px",
-		},
-		legend: {
-			position: "bottom",
-		},
-		plotOptions: {
-			pie: {
-				donut: {
-					size: "30%",
-				},
-			},
-		},
+		datasets: [{
+			label: "CPU Usage (%)",
+			backgroundColor: ["#3e95cd", "#8e5ea2"],
+			data: [0, 100]
+		}]
+	},
+	options: {
+		responsive: true,
+		layout: {
+            padding: {
+				left: 50,
+				right: 50
+			}
+        },
+		title: {
+			display: true,
+			text: 'Predicted world population (millions) in 2050'
+		}
 	}
-
-	var cpuUsage = new ApexCharts(
-		document.getElementById("cpu-usage"),
-		optionsCpuUsage
-	)
-	cpuUsage.render();
-
+});
+$(document).ready(function() {
 	var cpuusage;
 	setInterval(function() {
 		cpuusage = getcpu();
+		updateData(CpuChart, cpuusage);
+		CpuChart.update();
 
-		optionsCpuUsage = {
-			series: [cpuusage, 100 - cpuusage],
+	}, 1000);
+
+	/**
+	
+		let optionsCpuUsage = {
+			series: [0, 100],
 			labels: ["Usage", "Free"],
 			colors: ["#435ebe", "#55c6e8"],
 			chart: {
@@ -72,17 +55,48 @@ $(document).ready(function() {
 				},
 			},
 		}
-
-
+	
 		var cpuUsage = new ApexCharts(
 			document.getElementById("cpu-usage"),
 			optionsCpuUsage
 		)
-		$("#cpu-usage").empty();
 		cpuUsage.render();
-
-	}, 2000);
-
+	
+		var cpuusage;
+		setInterval(function() {
+			cpuusage = getcpu();
+	
+			optionsCpuUsage = {
+				series: [cpuusage, 100 - cpuusage],
+				labels: ["Usage", "Free"],
+				colors: ["#435ebe", "#55c6e8"],
+				chart: {
+					type: "donut",
+					width: "100%",
+					height: "350px",
+				},
+				legend: {
+					position: "bottom",
+				},
+				plotOptions: {
+					pie: {
+						donut: {
+							size: "30%",
+						},
+					},
+				},
+			}
+	
+	
+			var cpuUsage = new ApexCharts(
+				document.getElementById("cpu-usage"),
+				optionsCpuUsage
+			)
+			$("#cpu-usage").empty();
+			cpuUsage.render();
+	
+		}, 2000);
+	 */
 });
 
 function getcpu() {
@@ -97,6 +111,11 @@ function getcpu() {
 		}
 	});
 	return cpu;
+}
+
+function updateData(chart, data) {
+	chart.data.datasets[0].data[0] = data;
+	chart.data.datasets[0].data[1] = 100 - data;
 }
 
 let optionsMemoryUsage = {
