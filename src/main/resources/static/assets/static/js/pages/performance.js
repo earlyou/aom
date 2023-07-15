@@ -6,24 +6,19 @@ const CpuChart = new Chart(cpu, {
 		labels: ["Usage", "Free"],
 		datasets: [{
 			label: "CPU Usage (%)",
-			backgroundColor: ["#3e95cd", "#8e5ea2"],
+			backgroundColor: ["#3e95cd", "grey"],
 			data: [0, 100]
 		}]
 	},
 	options: {
 		responsive: true,
-		layout: {
-            padding: {
-				left: 50,
-				right: 50
-			}
-        },
 		title: {
 			display: true,
 			text: 'Predicted world population (millions) in 2050'
 		}
 	}
 });
+
 $(document).ready(function() {
 	var cpuusage;
 	setInterval(function() {

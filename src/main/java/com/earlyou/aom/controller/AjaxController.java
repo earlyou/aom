@@ -14,6 +14,7 @@ public class AjaxController {
 	public double getcpu() {
 		OperatingSystemMXBean osbean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		double cpuUsage = Math.round(osbean.getCpuLoad()*1000.0)/10.0;
+		System.out.println(cpuUsage);
 		
 		return cpuUsage;
 	}
