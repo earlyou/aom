@@ -23,6 +23,7 @@ $(document).ready(function() {
 	var cpuusage;
 	setInterval(function() {
 		cpuusage = getcpu();
+		console.log(cpuusage)
 		updateData(CpuChart, cpuusage);
 		CpuChart.update();
 
