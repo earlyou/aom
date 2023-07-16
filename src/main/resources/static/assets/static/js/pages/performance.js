@@ -1,4 +1,3 @@
-/*<![CDATA[*/
 const cpu = document.getElementById('cpu-usage');
 const mem = document.getElementById('memory-usage');
 
@@ -145,4 +144,3 @@ function updateMemData(chart, totmem, data) {
 	
 	chart.update();
 }
-/*]]>*/
