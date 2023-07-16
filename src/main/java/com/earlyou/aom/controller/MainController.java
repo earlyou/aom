@@ -86,10 +86,10 @@ public class MainController {
 				totmem = totmem + ramvo.getMcapa();
 			}
 			totmem = Math.round(totmem/(1024*1024*1024)*100)/100.0;
-			m.addAttribute("totmem", totmem);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		m.addAttribute("totmem", totmem);
 
 		return "index";
 	}
