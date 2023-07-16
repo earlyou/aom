@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.earlyou.aom.AutoStart;
 import com.earlyou.aom.biz.CpuBiz;
 import com.earlyou.aom.biz.FilestoreBiz;
 import com.earlyou.aom.biz.MbBiz;
@@ -20,7 +21,10 @@ import com.earlyou.aom.vo.OsinfoVO;
 import com.earlyou.aom.vo.RamVO;
 import com.earlyou.aom.vo.VgaVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class MainController {
 
 	@Autowired
@@ -89,6 +93,7 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		log.info("total memory: " + totmem);
 		m.addAttribute("totmem", totmem);
 
 		return "index";
