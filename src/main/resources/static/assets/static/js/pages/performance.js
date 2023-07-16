@@ -1,7 +1,7 @@
 const cpu = document.getElementById('cpu-usage');
 
 const CpuChart = new Chart(cpu, {
-	type: 'pie',
+	type: 'doughnut',
 	data: {
 		labels: ["Usage", "Free"],
 		datasets: [{
@@ -12,9 +12,18 @@ const CpuChart = new Chart(cpu, {
 	},
 	options: {
 		responsive: true,
-		title: {
-			display: true,
-			text: 'Predicted world population (millions) in 2050'
+		/** maintainAspectRatio should be 'true' but due to chart.js 4.x issues, this option must be 'false' so that the chart acts responsive 
+		 *	https://github.com/chartjs/Chart.js/issues/11005
+		*/
+		maintainAspectRatio: false,
+		cutout: '30%',
+		plugins: {
+			title: {
+				color: 'Green',
+				position: 'bottom',
+				display: true,
+				text: '0%'
+			}
 		}
 	}
 });
@@ -24,7 +33,6 @@ $(document).ready(function() {
 	setInterval(function() {
 		cpuusage = getcpu();
 		updateData(CpuChart, cpuusage);
-		CpuChart.update();
 
 	}, 1000);
 });
@@ -46,6 +54,15 @@ function getcpu() {
 function updateData(chart, data) {
 	chart.data.datasets[0].data[0] = data;
 	chart.data.datasets[0].data[1] = 100 - data;
+	chart.options.plugins.title.text = data+' %'
+	if (data <= 33.3) {
+		chart.options.plugins.title.color = 'Green';
+	}else if(data <= 66.6) {
+		chart.options.plugins.title.color = 'Yellow';
+	}else {
+		chart.options.plugins.title.color = 'Red';
+	}
+	chart.update();
 }
 
 let optionsMemoryUsage = {
