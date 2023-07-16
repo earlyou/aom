@@ -22,7 +22,7 @@ import com.earlyou.aom.vo.VgaVO;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	OsinfoBiz osbiz;
 	@Autowired
@@ -42,7 +42,7 @@ public class MainController {
 		m.addAttribute("main", "dashboard/main");
 		return "index";
 	}
-	
+
 	@GetMapping("/specification")
 	public String specification(Model m) {
 		m.addAttribute("sidebar", "sidebar");
@@ -64,7 +64,7 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		m.addAttribute("os", os);
 		m.addAttribute("mb", mb);
 		m.addAttribute("cpu", cpu);
@@ -73,11 +73,24 @@ public class MainController {
 		m.addAttribute("vgalist", vgalist);
 		return "index";
 	}
-	
+
 	@GetMapping("/performance")
 	public String performance(Model m) {
 		m.addAttribute("sidebar", "sidebar");
 		m.addAttribute("main", "sysspec/performance");
+
+		double totmem = 0.0;
+		try {
+			List<RamVO> ramlist = rambiz.get();
+			for (RamVO ramvo : ramlist) {
+				totmem = totmem + ramvo.getMcapa();
+			}
+			totmem = Math.round(totmem/(1024*1024*1024)*100)/100.0;
+			m.addAttribute("totmem", totmem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return "index";
 	}
 }
