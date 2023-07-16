@@ -23,7 +23,6 @@ $(document).ready(function() {
 	var cpuusage;
 	setInterval(function() {
 		cpuusage = getcpu();
-		console.log('getcpu: ' + cpuusage)
 		updateData(CpuChart, cpuusage);
 		CpuChart.update();
 
@@ -41,7 +40,6 @@ function getcpu() {
 			cpu = data;
 		}
 	});
-	console.log('ajax cpu: ' + cpu)
 	return cpu;
 }
 
