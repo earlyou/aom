@@ -73,7 +73,7 @@ public class AutoStart implements CommandLineRunner {
 		osbiz.register(newos);
 
 		// Motherboard
-		log.info("Updating OS informaion");
+		log.info("Updating Motherboard informaion");
 		mbbiz.removeall();
 		String mbsn = mb.getSerialNumber();
 		String mbmfr = mb.getManufacturer();
@@ -97,9 +97,10 @@ public class AutoStart implements CommandLineRunner {
 		cpubiz.register(newcpu);
 
 		// Memory
-		log.info("Updating Motherboard informaion");
+		log.info("Updating Memory informaion");
 		rambiz.removeall();
 		List<PhysicalMemory> mem = memory.getPhysicalMemory();
+		log.info(mem.toString());
 		for (PhysicalMemory pm : mem) {
 			String mbank = pm.getBankLabel();
 			double mcapa = pm.getCapacity();
