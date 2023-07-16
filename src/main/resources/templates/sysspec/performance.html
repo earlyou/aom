@@ -103,6 +103,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 
 <script th:inline="javascript">
-    var totmem = /*[[${totmem}]]*/0.0;
+	/*<![CDATA[*/
+	var totmem = /*[[${totmem}]]*/0.0;
+    /*]]>*/
 </script>
 <script src="assets/static/js/pages/performance.js"></script>
