@@ -63,8 +63,6 @@ public class AutoStart implements CommandLineRunner {
 		ComputerSystem com = hal.getComputerSystem();
 		Baseboard mb = com.getBaseboard();
 		GlobalMemory memory = hal.getMemory();
-		log.info("memory.toString: "+memory.toString());
-		log.info("memory.getPhysicalMemory(): "+memory.getPhysicalMemory().toString());
 
 		// Osinfo
 		log.info("Updating OS informaion");
@@ -73,7 +71,6 @@ public class AutoStart implements CommandLineRunner {
 		String booted = String.valueOf(Instant.ofEpochSecond(os.getSystemBootTime()));
 		booted = booted.replace("T", " ").replace("Z", "");
 		OsinfoVO newos = new OsinfoVO(osinfo, booted);
-		log.info(newos.toString());
 		osbiz.register(newos);
 
 		// Motherboard
@@ -87,7 +84,6 @@ public class AutoStart implements CommandLineRunner {
 			mbvs = com.getFirmware().getVersion();
 		}
 		MbVO newmb = new MbVO(mbsn, mbmfr, mbmd, mbvs);
-		log.info(newmb.toString());
 		mbbiz.register(newmb);
 
 		// CPU
@@ -99,7 +95,6 @@ public class AutoStart implements CommandLineRunner {
 		int cppc = cpu.getPhysicalProcessorCount();
 		int clpc = cpu.getLogicalProcessorCount();
 		CpuVO newcpu = new CpuVO(cname, carch, cpc, cppc, clpc);
-		log.info(newcpu.toString());
 		cpubiz.register(newcpu);
 
 		// Memory
@@ -113,7 +108,6 @@ public class AutoStart implements CommandLineRunner {
 			String mmfr = pm.getManufacturer();
 			String mtype = pm.getMemoryType();
 			RamVO newram = new RamVO(mbank, mcapa, mclock, mmfr, mtype);
-			log.info(newram.toString());
 			rambiz.register(newram);
 		}
 
@@ -125,7 +119,6 @@ public class AutoStart implements CommandLineRunner {
 			double fstot = fs.getTotalSpace();
 			String fstype = fs.getType();
 			FilestoreVO newfs = new FilestoreVO(fsmnt, fstot, fstype);
-			log.info(newfs.toString());
 			fsbiz.register(newfs);
 		}
 
@@ -140,7 +133,6 @@ public class AutoStart implements CommandLineRunner {
 			String gcvs = gc.getVersionInfo().substring(gc.getVersionInfo().indexOf("=") + 1);
 			double gcvr = gc.getVRam();
 			VgaVO vgavo = new VgaVO(gcid, gcnm, gcvd, gcvs, gcvr);
-			log.info(vgavo.toString());
 			vgabiz.register(vgavo);
 		}
 	}

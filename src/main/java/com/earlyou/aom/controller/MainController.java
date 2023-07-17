@@ -22,6 +22,9 @@ import com.earlyou.aom.vo.RamVO;
 import com.earlyou.aom.vo.VgaVO;
 
 import lombok.extern.slf4j.Slf4j;
+import oshi.SystemInfo;
+import oshi.hardware.GlobalMemory;
+import oshi.hardware.HardwareAbstractionLayer;
 
 @Controller
 @Slf4j
@@ -39,6 +42,10 @@ public class MainController {
 	FilestoreBiz fsbiz;
 	@Autowired
 	VgaBiz vgabiz;
+
+	SystemInfo si = new SystemInfo();
+	HardwareAbstractionLayer hal = si.getHardware();
+	GlobalMemory memory = hal.getMemory();
 
 	@GetMapping("/")
 	public String main(Model m) {
@@ -83,16 +90,8 @@ public class MainController {
 		m.addAttribute("sidebar", "sidebar");
 		m.addAttribute("main", "sysspec/performance");
 
-		double totmem = 0.0;
-		try {
-			List<RamVO> ramlist = rambiz.get();
-			for (RamVO ramvo : ramlist) {
-				totmem = totmem + ramvo.getMcapa();
-			}
-			totmem = Math.round(totmem/(1024*1024*1024)*100)/100.0;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		double totmem = memory.getTotal();
+		totmem = Math.round(totmem/(1024*1024*1024)*100)/100.0;
 		m.addAttribute("totmem", totmem);
 
 		return "index";
