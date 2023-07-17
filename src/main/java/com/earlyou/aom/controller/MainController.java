@@ -93,7 +93,6 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		log.info("total memory: " + totmem);
 		m.addAttribute("totmem", totmem);
 
 		return "index";
