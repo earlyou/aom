@@ -63,6 +63,7 @@ public class AutoStart implements CommandLineRunner {
 		ComputerSystem com = hal.getComputerSystem();
 		Baseboard mb = com.getBaseboard();
 		GlobalMemory memory = hal.getMemory();
+		log.info("memory.toString: "+memory.toString());
 
 		// Osinfo
 		log.info("Updating OS informaion");
@@ -104,7 +105,6 @@ public class AutoStart implements CommandLineRunner {
 		log.info("Updating Memory informaion");
 		rambiz.removeall();
 		List<PhysicalMemory> mem = memory.getPhysicalMemory();
-		log.info(hal.getMemory().getPhysicalMemory().toString());
 		for (PhysicalMemory pm : mem) {
 			String mbank = pm.getBankLabel();
 			double mcapa = pm.getCapacity();
