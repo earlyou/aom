@@ -64,6 +64,7 @@ public class AutoStart implements CommandLineRunner {
 		Baseboard mb = com.getBaseboard();
 		GlobalMemory memory = hal.getMemory();
 		log.info("memory.toString: "+memory.toString());
+		log.info("memory.getPhysicalMemory(): "+memory.getPhysicalMemory().toString());
 
 		// Osinfo
 		log.info("Updating OS informaion");
