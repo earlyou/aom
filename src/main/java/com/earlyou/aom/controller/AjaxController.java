@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.management.OperatingSystemMXBean;
 
+import lombok.extern.slf4j.Slf4j;
 import oshi.SystemInfo;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.hardware.Sensors;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
 
 @RestController
+@Slf4j
 public class AjaxController {
 
 	@GetMapping("getcpu")
@@ -62,5 +65,31 @@ public class AjaxController {
 		}
 		
 		return fsinfo;
+	}
+	
+	@GetMapping("gettemp")
+	public double gettemp() {
+		SystemInfo si = new SystemInfo();
+
+		HardwareAbstractionLayer hal = si.getHardware();
+		Sensors sensors = hal.getSensors();
+		
+		double temp = 0.0;
+		temp = sensors.getCpuTemperature();
+		
+		return temp;
+	}
+	
+	@GetMapping("getfan")
+	public int[] getfan() {
+		SystemInfo si = new SystemInfo();
+
+		HardwareAbstractionLayer hal = si.getHardware();
+		Sensors sensors = hal.getSensors();
+		
+		int[] fan = null;
+		fan = sensors.getFanSpeeds();
+		
+		return fan;
 	}
 }

@@ -1,6 +1,8 @@
 const cpu = document.getElementById('cpu-usage');
 const mem = document.getElementById('memory-usage');
 const strg = document.getElementById('storage-usage');
+const cputemp = document.getElementById('cpu-temperature');
+const fanspeed = document.getElementById('fan-speed');
 
 var mb = 1024 * 1024;
 var gb = mb * 1024;
@@ -94,10 +96,73 @@ const StrgChart = new Chart(strg, {
 	}
 });
 
+let width, height, gradient;
+function getGradient(ctx, chartArea) {
+	const chartWidth = chartArea.right - chartArea.left;
+	const chartHeight = chartArea.bottom - chartArea.top;
+	if (!gradient || width !== chartWidth || height !== chartHeight) {
+		// Create the gradient because this is either the first render
+		// or the size of the chart has changed
+		width = chartWidth;
+		height = chartHeight;
+		gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+		gradient.addColorStop(0, 'Blue');
+		gradient.addColorStop(0.5, 'Orange');
+		gradient.addColorStop(1, 'Red');
+	}
+	return gradient;
+}
+
+const TempChart = new Chart(cputemp, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [
+			{
+				label: 'Cpu Temperature(ºC)',
+				data: [],
+				borderColor: function(context) {
+					const chart = context.chart;
+					const { ctx, chartArea } = chart;
+
+					if (!chartArea) {
+						// This case happens on initial chart load
+						return;
+					}
+					return getGradient(ctx, chartArea);
+				},
+			}
+		]
+	},
+	options: {
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+			legend: {
+				position: 'top',
+			},
+			title: {
+				display: true,
+				text: 'Chart.js Line Chart'
+			},
+			tooltip: {
+				position: 'nearest'
+			}
+		},
+		interaction: {
+			intersect: false,
+			mode: 'index',
+		},
+	},
+});
+
 $(document).ready(function() {
 	var cpuusage;
 	var memusage;
 	var fsinfo;
+	var temp;
+	var hm = [];
+	var tp = [];
 	setInterval(function() {
 		cpuusage = getcpu();
 		updateCpuData(CpuChart, cpuusage);
@@ -107,8 +172,41 @@ $(document).ready(function() {
 
 		fsinfo = getfs();
 		updateFsData(StrgChart, fsinfo, fslist);
+
+		temp = gettemp();
+		var now = new Date();
+		updateTempData(TempChart, temp, tp, now, hm);
+
 	}, 1000);
 });
+
+function updateTempData(chart, temp, tp, now, hm) {
+	if (hm.length < 30) {
+		hm.push(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
+		tp.push(temp);
+	} else {
+		hm.shift();
+		tp.shift();
+		hm.push(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
+		tp.push(temp);
+	};
+	/**
+		if (temp < 53.6) {
+			chart.data.datasets[0].borderColor = 'Blue';
+			chart.data.datasets[0].backgroundColor = 'Blue';
+		} else if (temp < 77.3) {
+			chart.data.datasets[0].borderColor = '#ffa100';
+			chart.data.datasets[0].backgroundColor = '#ffa100';
+		} else {
+			chart.data.datasets[0].borderColor = 'Red';
+			chart.data.datasets[0].backgroundColor = 'Red';
+		};
+	*/
+	chart.data.labels = hm;
+	chart.data.datasets[0].data = tp;
+	chart.options.plugins.title.text = Math.round(temp * 10) / 10 + ' ºC'
+	chart.update();
+}
 
 function getcpu() {
 	var cpu;
@@ -150,6 +248,34 @@ function getfs() {
 		}
 	});
 	return fs;
+}
+
+function gettemp() {
+	var temp;
+	$.ajax({
+		type: 'GET',
+		url: '/gettemp',
+		data: {},
+		async: false,
+		success: function(data) {
+			temp = data
+		}
+	});
+	return temp;
+}
+
+function getfan() {
+	var fan;
+	$.ajax({
+		type: 'GET',
+		url: '/getfan',
+		data: {},
+		async: false,
+		success: function(data) {
+			fan = data
+		}
+	});
+	return fan;
 }
 
 function updateCpuData(chart, data) {
@@ -215,38 +341,38 @@ function updateFsData(chart, fsinfo, fslist) {
 			tot = fs.fstot / eb;
 			totunit = ' EB';
 		} else if (fs.fstot >= pb) {
-			tot = Math.round(fs.fstot / pb*10)/1;
+			tot = Math.round(fs.fstot / pb * 10) / 1;
 			totunit = ' PB';
 		} else if (fs.fstot >= tb) {
-			tot = Math.round(fs.fstot / tb*10)/10;
+			tot = Math.round(fs.fstot / tb * 10) / 10;
 			totunit = ' TB';
 		} else if (fs.fstot >= gb) {
-			tot = Math.round(fs.fstot / gb*10)/10;
+			tot = Math.round(fs.fstot / gb * 10) / 10;
 			totunit = ' GB';
 		} else if (fs.fstot >= mb) {
-			tot = Math.round(fs.fstot / mb*10)/10;
+			tot = Math.round(fs.fstot / mb * 10) / 10;
 			totunit = ' MB';
 		};
-		
-		var free = fs.fstot * infolist[index]/100;
+
+		var free = fs.fstot * infolist[index] / 100;
 		var freeunit = '';
 		if (free >= eb) {
 			free = free / eb;
 			freeunit = ' EB';
 		} else if (free >= pb) {
-			free = Math.round(free / pb*10)/10;
+			free = Math.round(free / pb * 10) / 10;
 			freeunit = ' PB';
 		} else if (free >= tb) {
-			free = Math.round(free / tb*10)/10;
+			free = Math.round(free / tb * 10) / 10;
 			freeunit = ' TB';
 		} else if (free >= gb) {
-			free = Math.round(free / gb*10)/10;
+			free = Math.round(free / gb * 10) / 10;
 			freeunit = ' GB';
 		} else if (free >= mb) {
-			free = Math.round(free / mb*10)/10;
+			free = Math.round(free / mb * 10) / 10;
 			freeunit = ' MB';
 		};
-		
+
 		labels.push(free + freeunit + ' / ' + tot + totunit + ' || ' + fs.fsmnt);
 	});
 	chart.data.labels = labels;
