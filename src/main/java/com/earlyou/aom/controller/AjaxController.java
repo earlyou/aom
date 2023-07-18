@@ -1,6 +1,9 @@
 package com.earlyou.aom.controller;
 
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +13,9 @@ import com.sun.management.OperatingSystemMXBean;
 import oshi.SystemInfo;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OperatingSystem;
 
 @RestController
 public class AjaxController {
@@ -37,5 +43,24 @@ public class AjaxController {
 		double memratio = Math.round(usagemem/totmem*1000)/10.0;
 		
 		return memratio;
+	}
+
+	@GetMapping("getfs")
+	public List<Double> getfs() {
+		SystemInfo si = new SystemInfo();
+
+		OperatingSystem os = si.getOperatingSystem();
+		FileSystem fileSystem = os.getFileSystem();
+		
+		List<Double> fsinfo = new ArrayList<Double>();
+		double usable = 0.0;
+		double totfs = 0.0;
+		for (OSFileStore fs : fileSystem.getFileStores()) {
+			usable = fs.getUsableSpace();
+			totfs = fs.getTotalSpace();
+			fsinfo.add(Math.round(usable/totfs*1000)/10.0);
+		}
+		
+		return fsinfo;
 	}
 }

@@ -63,10 +63,6 @@
 						<li class="submenu-item">
 							<a href="/performance" class="submenu-link">Performance</a>
 						</li>
-
-						<li class="submenu-item">
-							<a href="component-badge.html" class="submenu-link">Badge</a>
-						</li>
 					</ul>
 				</li>
 
@@ -536,14 +532,14 @@
 	$('.submenu-item').removeClass('active');
 	$('.submenu').removeClass('active');
 	$('.has-sub').removeClass('active');
-	
+
 	var pathname = $(location).attr('pathname');
-	if($('a[href='+'"'+pathname+'"'+']').hasClass('submenu-link')){
+	if ($('a[href=' + '"' + pathname + '"' + ']').hasClass('submenu-link')) {
 		$('a[href=' + '"' + pathname + '"' + ']').parent('li').parent('ul').parent('li').addClass('active');
 		$('a[href=' + '"' + pathname + '"' + ']').parent('li').parent('ul').addClass('active');
 		$('a[href=' + '"' + pathname + '"' + ']').parent('li').addClass('active');
-	}else{
+	} else {
 		$('a[href=' + '"' + pathname + '"' + ']').parent('li').addClass('active');
 	}
-	
+
 </script>

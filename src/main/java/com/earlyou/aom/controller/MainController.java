@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.earlyou.aom.AutoStart;
 import com.earlyou.aom.biz.CpuBiz;
 import com.earlyou.aom.biz.FilestoreBiz;
 import com.earlyou.aom.biz.MbBiz;
@@ -91,8 +90,16 @@ public class MainController {
 		m.addAttribute("main", "sysspec/performance");
 
 		double totmem = memory.getTotal();
-		totmem = Math.round(totmem/(1024*1024*1024)*100)/100.0;
+		totmem = Math.round(totmem / (1024 * 1024 * 1024) * 100) / 100.0;
 		m.addAttribute("totmem", totmem);
+
+		List<FilestoreVO> fslist = null;
+		try {
+			fslist = fsbiz.get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		m.addAttribute("fslist", fslist);
 
 		return "index";
 	}
