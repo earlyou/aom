@@ -59,9 +59,11 @@ public class AjaxController {
 		double usable = 0.0;
 		double totfs = 0.0;
 		for (OSFileStore fs : fileSystem.getFileStores()) {
-			usable = fs.getUsableSpace();
-			totfs = fs.getTotalSpace();
-			fsinfo.add(Math.round(usable/totfs*1000)/10.0);
+			if (fs != null) {
+				usable = fs.getUsableSpace();
+				totfs = fs.getTotalSpace();
+				fsinfo.add(Math.round(usable/totfs*1000)/10.0);
+			}
 		}
 		
 		return fsinfo;

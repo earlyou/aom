@@ -2,7 +2,6 @@ const cpu = document.getElementById('cpu-usage');
 const mem = document.getElementById('memory-usage');
 const strg = document.getElementById('storage-usage');
 const cputemp = document.getElementById('cpu-temperature');
-const fanspeed = document.getElementById('fan-speed');
 
 var mb = 1024 * 1024;
 var gb = mb * 1024;
@@ -143,7 +142,7 @@ const TempChart = new Chart(cputemp, {
 			},
 			title: {
 				display: true,
-				text: 'Chart.js Line Chart'
+				text: 'CPU Temperature'
 			},
 			tooltip: {
 				position: 'nearest'
@@ -163,50 +162,46 @@ $(document).ready(function() {
 	var temp;
 	var hm = [];
 	var tp = [];
+	var fan = [];
+	fsinfo = getfs();
+	var propeller = new Propeller(document.getElementById('turbine'), {
+		inertia: 1,
+		angle: 0,
+		speed: 1
+	});
+	propeller.unbind();
+	updateFsData(StrgChart, fsinfo, fslist);
 	setInterval(function() {
 		cpuusage = getcpu();
 		updateCpuData(CpuChart, cpuusage);
-
+		
 		memusage = getmem();
 		updateMemData(MemChart, totmem, memusage);
-
-		fsinfo = getfs();
-		updateFsData(StrgChart, fsinfo, fslist);
-
+		
 		temp = gettemp();
 		var now = new Date();
 		updateTempData(TempChart, temp, tp, now, hm);
-
-	}, 1000);
-});
-
-function updateTempData(chart, temp, tp, now, hm) {
-	if (hm.length < 30) {
-		hm.push(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
-		tp.push(temp);
-	} else {
-		hm.shift();
-		tp.shift();
-		hm.push(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
-		tp.push(temp);
-	};
-	/**
-		if (temp < 53.6) {
-			chart.data.datasets[0].borderColor = 'Blue';
-			chart.data.datasets[0].backgroundColor = 'Blue';
-		} else if (temp < 77.3) {
-			chart.data.datasets[0].borderColor = '#ffa100';
-			chart.data.datasets[0].backgroundColor = '#ffa100';
+		
+		fan = getfan();
+		if (fan.length == 0) {
+			fan = temp;
 		} else {
-			chart.data.datasets[0].borderColor = 'Red';
-			chart.data.datasets[0].backgroundColor = 'Red';
+			var filtered = fan.filter(function(x) {
+				return x !== 0;
+			});
+			fan = average(filtered) / 40
 		};
-	*/
-	chart.data.labels = hm;
-	chart.data.datasets[0].data = tp;
-	chart.options.plugins.title.text = Math.round(temp * 10) / 10 + ' ºC'
-	chart.update();
-}
+	}, 1000);
+	
+	setInterval(function() {
+		updateFanSpeed(propeller, fan);
+	}, 1000 / 60);
+
+	setInterval(function() {
+		fsinfo = getfs();
+		updateFsData(StrgChart, fsinfo, fslist);
+	}, 60000);
+});
 
 function getcpu() {
 	var cpu;
@@ -381,6 +376,38 @@ function updateFsData(chart, fsinfo, fslist) {
 	chart.update();
 }
 
+function updateTempData(chart, temp, tp, now, hm) {
+	if (hm.length < 15) {
+		hm.push(now.getMinutes() + ':' + now.getSeconds());
+		tp.push(temp);
+	} else {
+		tp.shift();
+		hm.shift();
+		hm.push(now.getMinutes() + ':' + now.getSeconds());
+		tp.push(temp);
+	};
+	chart.data.labels = hm;
+	chart.data.datasets[0].data = tp;
+	chart.options.plugins.title.text = Math.round(temp * 10) / 10 + ' ºC'
+	chart.update();
+}
+
+
+function updateFanSpeed(propeller, fan) {
+	if (fan == 0) {
+		propeller.stop();
+	} else if (propeller.speed < fan) {
+		propeller.speed = propeller.speed + 0.1;
+	} else if (propeller.speed > fan) {
+		propeller.speed = propeller.speed - 0.1;
+	}
+	/*
+	window.requestAnimationFrame(function() {
+		updateFanSpeed(propeller, fan);
+	});
+	*/
+}
+
 function resetStrgData(chart, list) {
 	chart.data.labels.splice(-1, 1);
 	list.forEach(function(fs) {
@@ -388,4 +415,8 @@ function resetStrgData(chart, list) {
 		chart.data.datasets[0].data.push(0);
 		chart.update();
 	});
+}
+
+function average(array) {
+	return array.reduce((sum, current) => sum + current, 0) / array.length;
 }

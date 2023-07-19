@@ -1,3 +1,9 @@
+<style>
+	#turbine {
+		display: block;
+		margin: auto;
+	}
+</style>
 <header class="mb-3">
 	<a href="#" class="burger-btn d-block d-xl-none">
 		<i class="bi bi-justify fs-3"></i>
@@ -46,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-12 col-xl-6">
 					<div class="card">
@@ -64,7 +70,8 @@
 							<h4>Fan Speed</h4>
 						</div>
 						<div class="card-body">
-							<canvas id="fan-speed"></canvas>
+							<img id="turbine" src="assets/propeller/img/wing-300px-default.png"
+								style="transform: rotate(0deg) translateZ(0px);max-width:100%; height:auto;">
 						</div>
 					</div>
 				</div>
@@ -72,17 +79,14 @@
 		</div>
 	</section>
 </div>
-
 <footer th:replace="~{footer}"></footer>
 
 <script src="assets/static/js/components/dark.js"></script>
 <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
 <script src="assets/compiled/js/app.js"></script>
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-
 <script th:inline="javascript">
 	/*<![CDATA[*/
 	var totmem = /*[[${totmem}]]*/0.0;
@@ -90,3 +94,6 @@
     /*]]>*/
 </script>
 <script src="assets/static/js/pages/performance.js"></script>
+
+<!-- propeller -->
+<script src="assets/propeller/propeller.min.js"></script>
