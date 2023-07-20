@@ -185,11 +185,14 @@ $(document).ready(function() {
 		fan = getfan();
 		if (fan.length == 0) {
 			fan = temp;
+			$('#turbspeed').text(Math.round(fan*10)/10*30 + 'rpm');
 		} else {
 			var filtered = fan.filter(function(x) {
 				return x !== 0;
 			});
-			fan = average(filtered) / 40
+			fan = average(filtered);
+			$('#turbspeed').text(Math.round(fan*10)/10 + 'rpm');
+			fan = fan / 40
 		};
 	}, 1000);
 	
