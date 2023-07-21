@@ -185,7 +185,8 @@ $(document).ready(function() {
 		fan = getfan();
 		if (fan.length == 0) {
 			fan = temp;
-			$('#turbspeed').text(Math.round(fan*10)/10*30 + 'rpm');
+			$('#turbspeed').text(Math.round(fan*10)/10*20 + 'rpm');
+			fan = fan/4;
 		} else {
 			var filtered = fan.filter(function(x) {
 				return x !== 0;
