@@ -103,4 +103,11 @@ public class MainController {
 
 		return "index";
 	}
+	
+	@GetMapping("/gmap")
+	public String gmap(Model m) {
+		m.addAttribute("sidebar", "sidebar");
+		m.addAttribute("main", "maps/gmap");
+		return "index";
+	}
 }

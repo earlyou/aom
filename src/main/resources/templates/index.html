@@ -23,12 +23,16 @@
 	<div id="app">
 		<!-- sidebar -->
 		<div th:replace="~{${sidebar} ? ${sidebar} : sidebar}"></div>
-		
-		
+
+
 		<!-- main -->
 		<div id="main" th:insert="~{${main} ? ${main} : error-404}"></div>
 
 	</div>
+	
+	<script src="assets/static/js/components/dark.js"></script>
+	<script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="assets/compiled/js/app.js"></script>
 
 </body>
 
