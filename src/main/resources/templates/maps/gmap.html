@@ -1,3 +1,11 @@
+<style>
+	.map {
+		height: 500px;
+		width: 100%;
+		margin: auto;
+	}
+</style>
+
 <header class="mb-3">
 	<a href="#" class="burger-btn d-block d-xl-none">
 		<i class="bi bi-justify fs-3"></i>
@@ -29,82 +37,34 @@
 <div class="page-content">
 	<section id="basic-modals">
 		<div class="row">
-			<div class="col-md-6 col-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title">Basic Map</h4>
-					</div>
-					<div class="card-content">
-						<div class="card-body">
-							<p>This is the Google Basic Map</p>
-							<!-- button trigger for  Vertically Centered modal -->
-							<button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-								data-bs-target="#basicGoogleMap">
-								Launch Modal
-							</button>
 
-							<!-- Google Basic Map Modal -->
-							<div class="modal fade text-left w-100" id="basicGoogleMap" tabindex="-1" role="dialog"
-								aria-labelledby="basicGoogleMapTitle" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-									role="document">
-									<div class="modal-content">
-										<div class="modal-header bg-info">
-											<h5 class="modal-title white" id="basicGoogleMapTitle">
-												Vertically Centered
-											</h5>
-											<button type="button" class="close" data-bs-dismiss="modal"
-												aria-label="Close">
-												<i data-feather="x"></i>
-											</button>
-										</div>
-										<div class="modal-body">
-											<div id="map"></div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-light-secondary"
-												data-bs-dismiss="modal">
-												<i class="bx bx-x d-block d-sm-none"></i>
-												<span class="d-none d-sm-block">Close</span>
-											</button>
-											<button type="button" class="btn btn-info ms-1" data-bs-dismiss="modal">
-												<i class="bx bx-check d-block d-sm-none"></i>
-												<span class="d-none d-sm-block">Accept</span>
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!-- Google Simple Map -->
 			<div class="col-md-6 col-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title">Vertically Centered</h4>
+						<h4 class="card-title">Simple Map</h4>
 					</div>
 					<div class="card-content">
 						<div class="card-body">
-							<p>
-								Add <code>.modal-dialog-centered</code> to
-								<code>.modal-dialog</code> to vertically center the
-								modal.
+							<p>This is the Google Simple Map</p>
+							<p><a
+									href="https://developers.google.com/maps/documentation/javascript/examples/map-simple">documentation</a>
 							</p>
 							<!-- button trigger for  Vertically Centered modal -->
 							<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
-								data-bs-target="#exampleModalCenter">
-								Launch Modal
+								data-bs-target="#simpleGoogleMap">
+								Launch Simple Map
 							</button>
-							<!-- Vertically Centered modal Modal -->
-							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-								aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+
+							<!-- Google Simple Map Modal -->
+							<div class="modal fade text-left w-100" id="simpleGoogleMap" tabindex="-1" role="dialog"
+								aria-labelledby="simpleGoogleMapTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
 									role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalCenterTitle">
-												Vertically Centered
+											<h5 class="modal-title" id="simpleGoogleMapTitle">
+												Simple Google Map
 											</h5>
 											<button type="button" class="close" data-bs-dismiss="modal"
 												aria-label="Close">
@@ -112,12 +72,7 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<p>
-												Croissant jelly-o halvah chocolate sesame snaps.
-												Brownie caramels candy canes chocolate cake
-												marshmallow icing lollipop I love. Gummies
-												macaroon donut caramels biscuit topping danish.
-											</p>
+											<div id="simplemap" class="map"></div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-light-secondary"
@@ -137,6 +92,62 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Google Pixel and Tile Coordinates Map -->
+			<div class="col-md-6 col-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Pixel and Tile Coordinates</h4>
+					</div>
+					<div class="card-content">
+						<div class="card-body">
+							<p>This is the Pixel and Tile Coordinates Map</p>
+							<p><a
+									href="https://developers.google.com/maps/documentation/javascript/examples/map-coordinates#maps_map_coordinates-html">documentation</a>
+							</p>
+							<!-- button trigger for  Vertically Centered modal -->
+							<button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+								data-bs-target="#coordsGoogleMap">
+								Launch Coordinates Map
+							</button>
+
+							<!-- Google Coordinates Map Modal -->
+							<div class="modal fade text-left w-100" id="coordsGoogleMap" tabindex="-1" role="dialog"
+								aria-labelledby="coordsGoogleMapTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+									role="document">
+									<div class="modal-content">
+										<div class="modal-header bg-success">
+											<h5 class="modal-title white" id="coordsGoogleMapTitle">
+												Pixel and Tile Coordinates
+											</h5>
+											<button type="button" class="close" data-bs-dismiss="modal"
+												aria-label="Close">
+												<i data-feather="x"></i>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div id="coordsmap" class="map"></div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-light-secondary"
+												data-bs-dismiss="modal">
+												<i class="bx bx-x d-block d-sm-none"></i>
+												<span class="d-none d-sm-block">Close</span>
+											</button>
+											<button type="button" class="btn btn-success ms-1" data-bs-dismiss="modal">
+												<i class="bx bx-check d-block d-sm-none"></i>
+												<span class="d-none d-sm-block">Accept</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="col-md-6 col-12">
 				<div class="card">
 					<div class="card-header">
@@ -318,6 +329,7 @@
 											</div>
 										</div>
 									</div>
+									
 									<div class="modal-success me-1 mb-1 d-inline-block">
 										<!-- Button trigger for Success theme modal -->
 										<button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -1253,21 +1265,7 @@
 
 <script>(g => {var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a)})); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))})
 		({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script>
-
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&region=kr"></script>
-
-<script>
-	let map;
-
-	async function initMap() {
-		const {Map} = await google.maps.importLibrary("maps");
-
-		map = new Map(document.getElementById("map"), {
-			center: {lat: -34.397, lng: 150.644},
-			zoom: 8,
-		});
-	}
-
-	initMap();
-</script>
+<!--
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE7iLjlPQBUAxlbjlB-b_zapkJKmD2nDQ&callback=initMap"></script>
+-->
+<script src="assets/static/js/pages/gmap.js"></script>
