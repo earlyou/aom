@@ -110,4 +110,18 @@ public class MainController {
 		m.addAttribute("main", "maps/gmap");
 		return "index";
 	}
+	
+	@GetMapping("/kmap")
+	public String kmap(Model m) {
+		m.addAttribute("sidebar", "sidebar");
+		m.addAttribute("main", "maps/kmap");
+		return "index";
+	}
+	
+	@GetMapping("/nmap")
+	public String nmap(Model m) {
+		m.addAttribute("sidebar", "sidebar");
+		m.addAttribute("main", "maps/nmap");
+		return "index";
+	}
 }
