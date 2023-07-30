@@ -124,4 +124,11 @@ public class MainController {
 		m.addAttribute("main", "maps/nmap");
 		return "index";
 	}
+	
+	@GetMapping("/ads")
+	public String ads(Model m) {
+		m.addAttribute("sidebar", "sidebar");
+		m.addAttribute("main", "dashboard/ads");
+		return "index";
+	}
 }
