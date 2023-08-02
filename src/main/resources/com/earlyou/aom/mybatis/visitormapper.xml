@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earlyou.aom.mapper.VisitorMapper">
+
+	<select id="select" parameterType="int" resultType="VisitorVO">
+		SELECT * FROM aomvisit
+		WHERE vid=#{vid}
+	</select>
+	<select id="selectall" resultType="VisitorVO">
+		SELECT * FROM aomvisit
+	</select>
+	<insert id="insert" parameterType="VisitorVO">
+		INSERT INTO aomvisit VALUES (#{vid},#{vip},#{vtime},#{vrefer},#{vagent})
+	</insert>
+	<update id="update" parameterType="VisitorVO">
+		UPDATE aomvisit SET vip=#{vip},vtime=#{vtime},vrefer=#{vrefer},vagent=#{vagent} WHERE vid=#{vid}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM aomvisit WHERE vid=#{vid}
+	</delete>
+	<delete id="deleteall">
+		DELETE FROM aomvisit
+	</delete>
+	
+</mapper>
